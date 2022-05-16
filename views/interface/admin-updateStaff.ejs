@@ -150,8 +150,7 @@
             let MaCV= parseInt(document.getElementById('position').value)
             let MaCN= document.getElementById('idcampus').value
             let Luong= parseFloat(document.getElementById('salary').value)
-
-            if(MaNV && HoTen && NgaySinh && DiaChi && Email && Sdt && MaCV && MaCN && Luong){
+            if(MaNV && HoTen && NgaySinh && DiaChi && Email && Sdt && MaCN && Luong){
                 fetch(`/staff/${MaNV}`, {
                     method:'PUT',
                     body: JSON.stringify({MaNV, HoTen, NgaySinh, DiaChi, Email, Sdt, MaCV, MaCN, Luong}),

@@ -24,6 +24,10 @@ const { getInfo, getStaffs, getStaff, addStaff, updatePass, updateStaff } = requ
 const { addBorBill, getborBills, getBorBill, changeStatusBorrow } = require('./controllers/borBill')
 const { addRetBill, getRetBills, getRetBill, changeStatusReturn } = require('./controllers/retBill')
 const { render, redirect } = require('express/lib/response')
+const viewCustomer = require('./controllers/view-customer')
+const viewUser = require('./controllers/view-user')
+const viewAdmin = require('./controllers/view-admin')
+const viewStaff = require('./controllers/view-staff')
 
 // ====Tạo tài khoản admin để bắt đầu=====
 app.get('/start',start)
@@ -37,7 +41,6 @@ app.get('/books',checkConfirmCN,getBooks) //done
 
 // Xem chi tiết quyển sách
 app.get('/book/:id',checkConfirmCN,getBook) //done
-
 
 // // ====Đăng nhập và đăng xuất====
 app.post('/login',checkConfirmCN,login) //done
@@ -99,190 +102,84 @@ app.get('/retBill/:id',checkLogin,onlyStaff,getRetBill) //Done
 
 
 // =============View========================================
-//-------------login user------------------------------
-app.get('/view/cf-cn-user/:cn', (req, res) => {
-    let cn = req.params.cn
-    req.session.chinhanh = cn
-    return res.redirect('/view/login')
-})
+//=============USER-VIEW (Dùng chung cho ADMIN và STAFF)===================================
+//Thiết lập session chi nhánh
+app.get('/view/cf-cn-user/:cn', viewUser.cf_cn_user)
 
-app.get('/view/login',(req,res)=>{
-    if(req.session.user){
-        return res.redirect('/view/authentication')
-    }
-    if(!req.session.chinhanh){
-        return res.redirect('/view')
-    }
-    return res.render('interface/login')   
-})
+//render template chọn chi nhánh
+app.get('/view', viewUser.view_index)
 
-app.get('/view',(req,res)=>{
-    let mess = req.query.mess || 'Vui lòng chọn đúng chi nhánh'
-    if(req.session.user){
-        return res.redirect('/view/authentication')
-    }
-    return res.render('interface/employee-confirm', {mess})
-})
+//render template login
+app.get('/view/login', viewUser.login)
 
-app.get('/view/authentication', (req, res) => {
-    let user = req.session.user
-    let cn = req.session.chinhanh
-    if(!user)                                          //Nhan vien chua login
-        return res.redirect('/view')
+//Phân quyền
+app.get('/view/authentication', viewUser.authentication)
 
-    if(user.MaCN !== cn && user.MaCV !== 0)           //Nhan vien chon sai chi nhanh logout
-        return res.redirect('/view/logout')
+//Xóa session của user
+app.get('/view/logout', viewUser.logout)
 
-    if(user.MaCV === 0)                                  //0: admin
-        return res.redirect('/view/admin-profile')
-    else                                                //1: staff
-        return res.redirect('/view/staff-profile')
-})
+//==========ADMIN-VIEW=======================
+//render template thông tin cá nhân của admin
+app.get('/view/admin-profile', viewAdmin.admin_profile)
 
-//-----Customer--------------------
-app.get('/view/cf-cn-customer/:cn', (req, res) => {
-    let cn = req.params.cn
-    req.session.chinhanh = cn
-    return res.redirect('/view/customer')
-})
+//render template các chức năng quản lý nhân viên
+app.get('/view/admin-staffManager', viewAdmin.admin_staffManager)
 
-app.get('/view/cn-customer',(req,res)=>{
-    if(req.session.chinhanh){
-        return res.redirect('/view/customer')
-    }
-    return res.render('interface/customer-confirm')
-})
+//render template danh sách nhân viên
+app.get('/view/admin-listStaff', viewAdmin.admin_listStaff)
 
-app.get('/view/customer',(req,res)=>{
-    if(!req.session.chinhanh)
-        return res.redirect('/view/cn-customer')
-    return res.render('interface/customer')
-})
+//render template thêm nhân viên
+app.get('/view/admin-addStaff', viewAdmin.admin_addStaff)
 
-app.get('/view/customer-detail-book/:MaSach',(req,res)=>{
-    if(!req.session.chinhanh)
-        return res.redirect('/view/cn-customer')
-    let {MaSach} = req.params
-    return res.render('interface/customer-detail-book', {MaSach})
-})
+//render template cập nhật nhân viên
+app.get('/view/admin-updateStaff', viewAdmin.admin_updateStaff)
 
-app.get('/view/customer-listBook',(req,res)=>{
-    if(!req.session.chinhanh)
-        return res.redirect('/view/cn-customer')
-    let {MaSach} = req.params
-    return res.render('interface/customer-listBook')
-})
+//========STAFF-VIEW===============================================================
+//render template thông tin cá nhân của nhân viên
+app.get('/view/staff-profile', viewStaff.staff_profile)
 
-//-----------profile------------------------
-app.get('/view/admin-profile',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    let user = req.session.user
-    return res.render('interface/admin-profile',{user})
-})
+//render template các chức năng quản lý sách
+app.get('/view/staff-bookManager', viewStaff.staff_bookManager)
 
-app.get('/view/staff-profile',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    let user = req.session.user
-    return res.render('interface/staff-profile',{user})
-})
-//-----------------Magament--------------------
-app.get('/view/admin-staffManager',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/admin-staffManager')
-})
+//render template danh sách các quyển sách
+app.get('/view/staff-listBook', viewStaff.staff_listBook)
 
+//render template thêm sách
+app.get('/view/staff-addBook', viewStaff.staff_addBook)
 
-app.get('/view/staff-bookManager',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/staff-bookManager')
-})
-//---------------------------------------------------
+//render template cập nhật sách
+app.get('/view/staff-updateBook', viewStaff.staff_updateBook)
 
-app.get('/view/admin-listStaff',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/admin-listStaff')
-})
+//render template chức năng mượn sách
+app.get('/view/staff-borrowBook', viewStaff.staff_borrowBook)
 
-app.get('/view/admin-addStaff',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/admin-addStaff')
-})
+//render template chức năng trả sách
+app.get('/view/staff-returnBook', viewStaff.staff_returnBook)
 
-app.get('/view/admin-updateStaff',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/admin-updateStaff')
-})
+//render template danh sách các phiếu mượn/trả
+app.get('/view/staff-bill', viewStaff.staff_bill)
 
-//book view---------------------------------------------
-app.get('/view/staff-listBook',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/staff-listBook')
-})
+//=========CUSTOMER-VIEW===============================================================
+//thiết lập session chi nhánh cho khác hàng
+app.get('/view/cf-cn-customer/:cn', viewCustomer.cf_cn_customer)
 
-app.get('/view/staff-addBook',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/staff-addbook')
-})
+//render template chọn chi nhánh cho khách hàng
+app.get('/view/cn-customer', viewCustomer.cn_customer)
 
-app.get('/view/staff-updateBook',(req,res)=>{
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/staff-updateBook')
-})
-//--------Borrow book-------------------------------
-app.get('/view/staff-borrowBook', (req, res) => {
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/staff-borrowBook')
-})
-//--------Return book-------------------------------
-app.get('/view/staff-returnBook', (req, res) => {
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/staff-returnBook')
-})
-//--------Bill--------------------------------------
-app.get('/view/staff-bill', (req, res) => {
-    if(!req.session.user){
-        return res.redirect('/view/login')
-    }
-    return res.render('interface/staff-bill')
-})
-//--------------------------------------------------
-app.get('/view/logout', (req, res) => {
-    req.session.destroy()
-    return res.redirect('/view/login')
-})
+//render template trang chủ thư viện
+app.get('/view/customer', viewCustomer.customer)
 
-app.get('/view/cn-logout', (req, res) => {
-    req.session.destroy()
-    return res.redirect('/')
-})
+//render template thông tin chi tiết quyển sách
+app.get('/view/customer-detail-book/:MaSach', viewCustomer.customer_detail_book)
 
-app.use((req,res)=>{
-    return res.redirect('/view/cn-customer')
-})
+//render template danh sách các quyển sách
+app.get('/view/customer-listBook', viewCustomer.customer_listBook)
+
+//xóa session chi nhánh cho khách hàng
+app.get('/view/cn-logout', viewCustomer.cn_logout)
+
+//====INCORRECT ROUTE => ROUTE FOR CUSTOMER===========================
+app.use((req,res)=> res.redirect('/view/cn-customer'))
 
 const PORT = 8888
 app.listen(PORT,()=>{console.log(`server is running at http://localhost:${PORT}`)})

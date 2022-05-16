@@ -65,7 +65,6 @@ login = async(req,res)=>{
                     })
                 }
                 let validPass = bcrypt.compareSync(data.Pass, result.recordset[0].Pass);
-                console.log(validPass)
                 if(validPass){
                     req.session.user = result.recordset[0]
                     return res.json({

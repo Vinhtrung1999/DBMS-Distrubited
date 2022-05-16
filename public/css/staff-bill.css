@@ -121,6 +121,37 @@
     opacity: 50%;
 }
 
+.input-custom{
+    padding: 2px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(0, 0, 0);
+    outline: none;
+}
+
+.search-area{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.btn-search{
+    padding: 0px 15px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(0, 0, 0);
+    box-shadow: #000000 3px 3px;
+    margin-bottom: 20px;
+    margin: 5px;
+}
+
+.btn-search:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btn-search:active{
+    opacity: 50%;
+}
 
 @media only screen and (max-width: 1200px) {
     .detail-task-lists{

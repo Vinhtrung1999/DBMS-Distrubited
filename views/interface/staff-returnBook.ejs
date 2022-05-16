@@ -29,7 +29,6 @@
             <div class="search-area">
                 <input type="text" class="search input-custom" id="search" name="search" placeholder="Nhập mã phiếu mượn">
                 <button class="btn-returnBook bg-green" id="btn-search">Kiểm tra</button>
-                <!-- <button class="btn-returnBook bg-green" id="test">pdf</button> -->
             </div>
             <div id="message"></div>
             <div id="content" style="display: none;">
@@ -93,7 +92,6 @@
     </div>
 
 </body>
-<script src="/lib/jsPDF-master/dist/jspdf.umd.min.js"></script>
 <script>
     let btn_search = document.getElementById('btn-search')
     let message = document.getElementById('message')
@@ -170,21 +168,5 @@
             })
             .catch(err => console.log(err))
     })
-
-// let pdf = document.getElementById('test')
-// pdf.addEventListener('click', () => {
-//     window.jsPDF = window.jspdf.jsPDF;
-//     var doc = new jsPDF();
-
-//     doc.text(20, 20, 'Hello world!');
-//     doc.text(20, 30, 'This is client-side Javascript to generate a PDF.');
-
-//     // Add new page
-//     doc.addPage();
-//     doc.text(20, 20, 'Visit CodexWorld.com');
-
-//     // Save the PDF
-//     doc.save('document.pdf');
-// })
 </script>
 </html>

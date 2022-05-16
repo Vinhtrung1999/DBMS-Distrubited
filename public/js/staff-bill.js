@@ -63,6 +63,8 @@ fetch('/borBills', {
 })
 .catch(err => console.log(err))
 
+
+let list_return = []
 //list return bill
 let returnBill = document.getElementById('returnBill')
 fetch('/retBills', {
@@ -73,11 +75,10 @@ fetch('/retBills', {
 })
 .then(data => data.json())
 .then(data => {
-    console.log(data.data)
     if(data.code == 200){
         let temp = ''
         data.data.forEach((val, index) => {
-            list_borrow.push(val)
+            list_return.push(val)
             temp += `<div onclick="show_bill_return('${val.MaPM}', '${val.MaPT}', '${val.TenSach}', '${val.HinhAnh}', '${val.MaSach}', '${val.MaSV_GV}', '${val.TenSV_GV}', '${val.NgayMuon.split("T")[0]}', '${val.NgayTra.split("T")[0]}')" class="list-content-items ${index % 2 == 0 ? 'bg-green cl-wh' : ''}">${val.MaPT}</div>`
         })
 
@@ -86,3 +87,34 @@ fetch('/retBills', {
 
 })
 .catch(err => console.log(err))
+
+let serach_bor = document.getElementById('search-bor')
+let serach_ret = document.getElementById('search-ret')
+
+serach_bor.addEventListener('keyup', (e) => {
+    let words = e.target.value
+    let tmp = ''
+    let count_cl = 0
+    list_borrow.forEach((val, index) => {
+        if(val.MaPM.toLowerCase().indexOf(words.toLowerCase()) != -1){
+            tmp += `<div onclick="show_bill_borrow('${val.MaPM}', '${val.MaNV}', '${val.TenSach}', '${val.HinhAnh}', '${val.MaSach}', '${val.MaSV_GV}', '${val.TenSV_GV}', '${val.NgayMuon.split("T")[0]}', '${val.MaCN}')" class="list-content-items ${count_cl % 2 == 0 ? 'bg-yl cl-wh' : ''}">${val.MaPM}</div>`
+            count_cl += 1
+        }
+    })
+    borrowBill.innerHTML = tmp
+})
+
+
+serach_ret.addEventListener('keyup', (e) => {
+    let words = e.target.value
+    let tmp = ''
+    let count_cl = 0
+    list_return.forEach((val, index) => {
+        if(val.MaPT.toLowerCase().indexOf(words.toLowerCase()) != -1){
+            tmp += `<div onclick="show_bill_return('${val.MaPM}', '${val.MaPT}', '${val.TenSach}', '${val.HinhAnh}', '${val.MaSach}', '${val.MaSV_GV}', '${val.TenSV_GV}', '${val.NgayMuon.split("T")[0]}', '${val.NgayTra.split("T")[0]}')" class="list-content-items ${count_cl % 2 == 0 ? 'bg-green cl-wh' : ''}">${val.MaPT}</div>`
+            count_cl += 1
+        }
+    })
+    returnBill.innerHTML = tmp
+})
+
