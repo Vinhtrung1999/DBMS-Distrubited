@@ -1,0 +1,98 @@
+.container{
+    margin-top: 10%;
+}
+
+.box{
+    background-color: rgb(255, 255, 255);
+    width: 40%;
+    margin: auto;
+    border: solid 3px #000000;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+
+.title-box{
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgb(0, 119, 255);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.body-box-items{
+    display: flex;
+    font-size: 1.2rem;
+    align-items: center;
+    padding: 10px;
+}
+
+.box-items-content{
+    width: 200px;
+    text-align: center;
+    color: rgb(1, 61, 1);
+    font-weight: 300;
+}
+
+.box-items-input{
+    flex: 1;
+    padding: 5px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(1, 61, 1);
+    outline: none;
+}
+
+.btn-login{
+    color: #ffffff;
+    padding: 3px 10px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    background-color: rgb(0, 151, 5);
+    border: solid 3px rgb(0, 0, 0);
+    box-shadow: #000000 3px 3px;
+    margin: 10px;
+}
+
+.btn-login:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btn-login:active{
+    opacity: 50%;
+}
+
+.bg-red{
+    background-color: rgb(138, 23, 23);
+}
+
+.msg{
+    width: 50%;
+    padding: 10px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.bg-err{
+    background-color: #ff000098;
+    color: #ffffff;
+}
+
+@media only screen and (max-width: 1200px) {
+    .body-box-items{
+        display: block;
+        padding: 10px;
+    }
+
+    .box{
+        width: 90%;
+    }
+
+    .box-items-input{
+        width: 100%;
+    }
+    
+}

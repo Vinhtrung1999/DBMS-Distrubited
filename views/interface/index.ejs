@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>confirm</title>
+</head>
+
+<body>
+    <select name="cn" id="cn">
+        <option value="CN1">Chi nhanh 1</option>
+        <option value="CN2">Chi nhanh 2</option>
+        <option value="ADMIN">admin</option>
+    </select>
+    <button type="button" id="btn">confirm</button>
+</body>
+<script>
+    let btn = document.getElementById('btn')
+    btn.addEventListener('click', () => {
+        let cn = document.getElementById('cn').value
+        fetch(`/index/${cn}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(data => data.json())
+            .then(data => {
+                if (data.code === 200)
+                    window.location.href = '/view/login'
+                else
+                    console.log('jgfj')
+            })
+            .catch(err => console.log(err))
+    })
+</script>
+
+</html>

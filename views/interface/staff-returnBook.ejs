@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | staff</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/staff.css">
+    <link rel="stylesheet" href="/css/staff-returnBook.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="staff-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="/view/staff-profile">Cá nhân</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-bookManager">Danh sách sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-borrowBook">Mượn sách</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="#">Trả sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-bill">Danh sách phiếu</a></button>
+    </div>
+    <div class="detail-task">
+        <div class="detail-task-container bg-grey">
+            <div class="search-area">
+                <input type="text" class="search input-custom" id="search" name="search" placeholder="Nhập mã phiếu mượn">
+                <button class="btn-returnBook bg-green" id="btn-search">Kiểm tra</button>
+                <!-- <button class="btn-returnBook bg-green" id="test">pdf</button> -->
+            </div>
+            <div id="message"></div>
+            <div id="content" style="display: none;">
+                <div class="returnBook-items">
+                    <div class="returnBook-items-title">Mã phiếu mượn</div>
+                    <div class="returnBook-items-content" id="MaPM">
+                        xxx xxx
+                    </div>
+                </div>
+                <div class="returnBook-items">
+                    <div class="returnBook-items-title">Mã SV/GV</div>
+                    <div class="returnBook-items-content" id="MaSV_GV">
+                        xxx xxx
+                    </div>
+                </div>
+                <div class="returnBook-items">
+                    <div class="returnBook-items-title">Tên SV/GV</div>
+                    <div class="returnBook-items-content" id="TenSV_GV">
+                        xxx xxx
+                    </div>
+                </div>
+                <div class="returnBook-items">
+                    <div class="returnBook-items-title">Mã sách</div>
+                    <div class="returnBook-items-content" id="MaSach">
+                        xxx xxx
+                    </div>
+                </div>
+                <div class="returnBook-items">
+                    <div class="returnBook-items-title">Tên sách</div>
+                    <div class="returnBook-items-content" id="TenSach">
+                        xxx xxx
+                    </div>
+                </div>
+                <div class="returnBook-items">
+                    <div class="returnBook-items-title">Ngày mượn</div>
+                    <div class="returnBook-items-content" id="NgayMuon">
+                        xxx xxx
+                    </div>
+                </div>
+                <div class="returnBook-items">
+                    <div class="returnBook-items-title">Chi nhánh</div>
+                    <div class="returnBook-items-content" id="MaCN">
+                        xxx xxx
+                    </div>
+                </div>
+                <div class="returnBook-items">
+                    <div class="returnBook-items-title">Hình ảnh</div>
+                    <div class="returnBook-items-content" id="MaCN">
+                        <img id="img" src="" alt="" width="50px">
+                    </div>
+                </div>
+                <div class="btn-returnBook-area">
+                    <!--" -->
+                    <button class="btn-returnBook bg-yl" id="btn-return" type="button">In phiếu trả</button>
+                </div>
+            </div>
+
+        </div>
+        
+
+    </div>
+
+</body>
+<script src="/lib/jsPDF-master/dist/jspdf.umd.min.js"></script>
+<script>
+    let btn_search = document.getElementById('btn-search')
+    let message = document.getElementById('message')
+    let btn_return = document.getElementById('btn-return')
+
+    btn_search.addEventListener('click', () => {
+        let MaPM = document.getElementById('search').value
+        if(MaPM){
+            fetch(`/borBill/${MaPM}`, {
+                method:'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(data => data.json())
+            .then(data => {
+                if(data.code == 200 && data.data != 0){
+                    message.innerHTML = ''
+                    let b = data.data
+                    document.getElementById('MaPM').innerHTML = b.MaPM
+                    document.getElementById('MaSach').innerHTML = b.MaSach
+                    document.getElementById('MaSV_GV').innerHTML = b.MaSV_GV
+                    document.getElementById('TenSV_GV').innerHTML = b.TenSV_GV
+                    document.getElementById('TenSach').innerHTML = b.TenSach
+                    document.getElementById('NgayMuon').innerHTML = b.NgayMuon.split('T')[0]
+                    document.getElementById('img').setAttribute('src', b.HinhAnh)
+                    b.MaCN == 'CN1' ? document.getElementById('MaCN').innerHTML = 'Chi nhánh 1' : document.getElementById('MaCN').innerHTML = 'Chi nhánh 2'
+
+                    document.getElementById('content').style.display = 'block'
+                }
+                else{
+                    let msg = `<div class="msg bg-err">Mã phiếu mượn không tồn tại</div>`
+                    message.innerHTML = msg
+                }
+            })
+            .catch(err => console.log(err))
+        }
+        else{
+            let msg = `<div class="msg bg-err">Vui lòng nhập thông tin</div>`
+            message.innerHTML = msg
+        }
+    })
+
+    btn_return.addEventListener('click', () => {
+        let MaPM = document.getElementById('MaPM').innerHTML
+
+        fetch(`/retBill/add`, {
+                method:'POST',
+                body: JSON.stringify({MaPM}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(data => data.json())
+            .then(data => {
+                if(data.code == 200){
+                    let MaSach = document.getElementById('MaSach').innerHTML
+                    fetch(`/changeStatusReturn`, {
+                        method:'POST',
+                        body: JSON.stringify({MaSach}),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(dataChange => dataChange.json())
+                    .then(dataChange => {
+                        let msg = `<div class="msg bg-success">Trả sách thành công</div>`
+                        message.innerHTML = msg
+                        window.print()
+                        document.getElementById('content').style.display = 'none'
+                    })
+                    .catch(err => console.log(err))
+                }
+            })
+            .catch(err => console.log(err))
+    })
+
+// let pdf = document.getElementById('test')
+// pdf.addEventListener('click', () => {
+//     window.jsPDF = window.jspdf.jsPDF;
+//     var doc = new jsPDF();
+
+//     doc.text(20, 20, 'Hello world!');
+//     doc.text(20, 30, 'This is client-side Javascript to generate a PDF.');
+
+//     // Add new page
+//     doc.addPage();
+//     doc.text(20, 20, 'Visit CodexWorld.com');
+
+//     // Save the PDF
+//     doc.save('document.pdf');
+// })
+</script>
+</html>

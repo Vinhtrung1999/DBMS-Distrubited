@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | staff</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/staff.css">
+    <link rel="stylesheet" href="/css/staff-listBook.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="staff-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="/view/staff-profile">Cá nhân</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="/view/staff-bookManager">Danh sách sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-borrowBook">Mượn sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-returnBook">Trả sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-bill">Dánh sách phiếu</a></button>
+    </div>
+
+    <div class="detail-task">
+        <div class="search-area">
+            <input type="text" class="search input-custom" id="search" name="search" placeholder="Nhập tên sách">
+            <button class="btn-listBook bg-blue cl-wh">Tìm</button>
+        </div>
+        <div class="list-book" id="list-book"></div>
+
+         <!-- model change pass -->
+        <div class="model-info bg-white" id="model_info">
+            <div class="model-info-header">
+                <img id="img" src="#" alt="" width="200px">
+            </div>
+            <div class="model-info-body">
+                <div class="model-info-items">
+                    <div class="model-items-title">Mã sách</div>
+                    <div id="dt-book-id">B01</div>    
+                </div>
+                <div class="model-info-items">
+                    <div class="model-items-title">Tên sách</div>
+                    <div id="dt-book-name">Cuộc cách một cộng rơm</div>    
+                </div>
+                <div class="model-info-items">
+                    <div class="model-items-title">Tác giả</div>
+                    <div id="dt-book-author">Mansanobu Fukuoka</div>    
+                </div>
+                <div class="model-info-items">
+                    <div class="model-items-title">Loại sách</div>
+                    <div id="dt-book-type">Book</div>   
+                </div>
+                <div class="model-info-items">
+                    <div class="model-items-title">Chi nhánh</div>
+                    <div id="dt-book-campus">Campus 1</div>   
+                </div>
+                <div class="model-info-items">
+                    <div class="model-items-title">Trạng thái</div>
+                    <div id="dt-book-status">Free</div>   
+                </div>
+            </div>
+            <div class="model-info-footer">
+                <button class="btn-listBook" type="button" id="close_model_info">Trở về</button>
+            </div>            
+        </div>
+    </div>
+</body>
+<script src="/js/staff-listBook.js"></script>
+</html>

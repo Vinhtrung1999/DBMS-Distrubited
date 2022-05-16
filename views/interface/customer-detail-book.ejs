@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/customer-detail-book.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="book-detail-container">
+        <div class="book-detail-title">Book infomation</div>
+        <div class="book-detail-content">
+            <div class="image-book">
+                <img class="img-book" id="img" src="https://cdn0.fahasa.com/media/flashmagazine/images/page_images/doc_lolita_o_tehran/2020_03_17_10_03_57_1-390x510.JPG">
+            </div>
+            <div class="book-info">
+                <div class="book-info-item">
+                    <div class="book-info-item-title">Mã sách</div>
+                    <div id="MaSach"><%= MaSach %></div>
+                </div>
+                <div class="book-info-item">
+                    <div class="book-info-item-title">Tên sách</div>
+                    <div id="TenSach">Lolita</div>
+                </div>
+                <div class="book-info-item">
+                    <div class="book-info-item-title">Loại sách</div>
+                    <div id="MaLoai">Book</div>
+                </div>
+                <div class="book-info-item">
+                    <div class="book-info-item-title">Tác giả</div>
+                    <div id="TacGia">Vladimir Vladimirovich</div>
+                </div>
+                <div class="book-info-item">
+                    <div class="book-info-item-title">Chi nhánh</div>
+                    <div id="MaCN">Campus 1</div>
+                </div>
+                <div class="book-info-item">
+                    <div class="book-info-item-title">Trang thái</div>
+                    <div id="TrangThai">Free</div>
+                </div>
+                <div class="btn-area">
+                    <a class="btn-link" href="/view/customer-listBook"><button class="btn-cusBookDetail">Trở về</button></a>
+                </div>
+            </div>  
+        </div>
+    </div>
+</body>
+<script>
+    const MaSach = window.location.href.split("/")[5]
+    fetch(`/book/${MaSach}`, {
+        method:'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(data => data.json())
+    .then(data => {
+        console.log(data)
+        if(data.code === 200){
+            let b = data.data
+            console.log(data.data)
+            document.getElementById('TenSach').innerHTML = b.TenSach
+            document.getElementById('img').setAttribute('src', b.HinhAnh)
+            b.MaCN == 'CN1' ? document.getElementById('MaCN').innerHTML = "Chi nhánh 1": document.getElementById('MaCN').innerHTML = "Chi nhánh 2" 
+
+            if(b.MaLoai == 'Sach01')
+                document.getElementById('MaLoai').innerHTML = 'Tiểu thuyết'
+            else if(b.MaLoai == 'Sach02')
+                document.getElementById('MaLoai').innerHTML = 'Truyện cười'
+            else if(b.MaLoai == 'Sach03')
+                document.getElementById('MaLoai').innerHTML = 'Trinh thám'
+            else
+                document.getElementById('MaLoai').innerHTML = 'Truyện ma'
+
+            if(b.TrangThai == false){
+                document.getElementById('TrangThai').setAttribute('class', 'cl-green')
+                document.getElementById('TrangThai').innerHTML='Có thể mượn'
+            }
+            else{
+                document.getElementById('TrangThai').setAttribute('class', 'cl-red')
+                document.getElementById('TrangThai').innerHTML='Đã được mượn'
+            }
+        }
+    })
+</script>
+</html>

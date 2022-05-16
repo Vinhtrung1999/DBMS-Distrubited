@@ -1,0 +1,55 @@
+.admin-title{
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgb(0, 119, 255);
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.btn-area{
+    margin: 0px 100px;
+}
+
+.btn-task{
+    padding: 3px 10px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px #000000;
+}
+
+.btn-task:hover{
+    opacity: 80%;
+}
+
+.btn-task:active{
+    opacity: 50%;
+}
+
+.detail-task{
+    margin: 0px 50px;
+    border: solid 3px #000000;
+    padding: 20px;
+    position: relative;
+}
+
+.btn-link{
+    text-decoration: none;
+    color: #000000;
+}
+
+.btn-active{
+    background-color: #ffffff;
+}
+
+@media only screen and (max-width: 1200px) {
+    .btn-area{
+        margin: 0px 10px
+    }
+
+    .detail-task{
+        margin: 0px 10px;
+        padding: 10px;
+    }
+}

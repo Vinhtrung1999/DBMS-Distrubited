@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | staff</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/staff.css">
+    <link rel="stylesheet" href="/css/admin-listStaff.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="staff-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="/view/admin-profile">Cá nhân</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="/view/admin-staffManager">Danh sách nhân viên</a></button>
+    </div>
+
+    <div class="detail-task">
+        <div class="search-area">
+            <input type="text" class="search input-custom" id="search" name="search" placeholder="Nhập tên nhân viên">
+            <button class="btn-listStaff bg-green cl-wh">Tìm</button>
+        </div>
+        <div class="list-staff" id="list-staff"></div>
+
+        <!-- model staff info -->
+        <div class="model-info bg-white" id="model_info">
+            <div class="model-info-header">
+                <img src="/images/user.png" alt="" width="100px">
+            </div>
+            <div class="model-info-body" id="body-model"></div>
+            <div class="model-info-footer">
+                <button class="btn-listStaff" type="button" id="close_model_info">Trở về</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/staff-listStaff.js"></script>
+
+</html>

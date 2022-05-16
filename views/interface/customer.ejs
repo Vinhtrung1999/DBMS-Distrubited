@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi! Welcome...</title>
+    <!-- link css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/customer.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wall"></div>
+    <div class="img-title">
+        <div class="title-container">
+            <div class="title-nav">
+                <i class="fa-solid fa-bars cl-wh"></i>
+                <div class="nav-bar">
+                    <a href="#" class="nav-item-link">
+                        <div class="nav-items">Trang chủ</div>
+                    </a>
+                    <a href="/view/customer-listBook" class="nav-item-link">
+                        <div class="nav-items">Danh sách sách</div>
+                    </a>
+                    <a href="/view/cn-logout" class="nav-item-link">
+                        <div class="nav-items">Chọn chi nhánh</div>
+                    </a>
+                </div>
+            </div>
+            <div class="title-logo">
+                <img src="/images/logo-1.png" alt="Logo" width="100%">
+            </div>
+            <div class="title-action">
+                <div class="action-login cl-wh">Hi!</div>
+            </div>
+        </div>
+    </div>
+    <div class="stadium mg-t-50">
+        <h2 class="t-center">Tiểu thuyết</h2>
+        <div class="stadium-1" id="list-Sach01"></div>
+        <h2 class="t-center">Truyện cười</h2>
+        <div class="stadium-1" id="list-Sach02"></div>
+        <h2 class="t-center">Trinh thám</h2>
+        <div class="stadium-1" id="list-Sach03"></div>
+        <h2 class="t-center">Truyện ma</h2>
+        <div class="stadium-1" id="list-Sach04"></div>
+    </div>
+
+    <div class="t-center btn-area mg-t">
+        <a href="/view/customer-listBook"><button class="btn-show-all">Xem tất cả</button></a>
+    </div>
+    <div class="stadium-2 mg-t-50">
+        <img class="img-show-action"
+            src="http://sog.ueh.edu.vn/wp-content/uploads/2020/10/4.-Th%C6%B0-vi%E1%BB%87n-th%C3%B4ng-minh-UEH.png"
+            width="80%">
+    </div>
+
+    <div class="info-shop mg-t">
+        <img class="img-show-action" src="https://nhaphoc.ueh.edu.vn/wp-content/uploads/2021/07/DSCF2187-1024x683.jpg"
+            width="40%">
+        <img class="img-show-action"
+            src="http://en.ueh.edu.vn/images/upload/editer/2.%20Th%C6%B0%20vi%E1%BB%87n%20th%C3%B4ng%20minh%20UEH.PNG"
+            width="40%">
+    </div>
+
+    <div class="footer mg-t-50">
+        <div class="footer-logo">
+            <img src="/images/logo-1.png" alt="">
+        </div>
+        <div class="footer-content">
+            <div>THỜI GIAN MỞ CỬA: 6:30 A.M - 20:00 P.M</div>
+            <div>THÔNG TIN CUNG CẤP CHÍNH THỐNG - CHỐNG CHỈ ĐỊNH TRÊN TẤT CẢ WEBSITE KHÁC</div>
+            <div>SẢN PHẨM ĐỘC QUYỀN ĐƯỢC ĐĂNG KÝ - COPYRIGHT © 2022 LIBRARY + ® ALL RIGHT RESERVED</div>
+        </div>
+        <div class="social-media">
+            <div class="pd-5"><i class="fa-brands fa-facebook"></i></div>
+            <div class="pd-5"><i class="fa-brands fa-facebook-messenger"></i></div>
+            <div class="pd-5"><i class="fa-brands fa-instagram-square"></i></div>
+            <div class="pd-5"><i class="fa-brands fa-twitter"></i></div>
+        </div>
+    </div>
+</body>
+
+<script>
+    fetch(`/books`, {
+        method:'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(data => data.json())
+    .then(data => {
+        if(data.code === 200){
+            let S01 = document.getElementById('list-Sach01')
+            let S02 = document.getElementById('list-Sach02')
+            let S03 = document.getElementById('list-Sach03')
+            let S04 = document.getElementById('list-Sach04')
+            let tmp1 = ''
+            let tmp2 = ''
+            let tmp3 = ''
+            let tmp4 = ''
+            data.data.forEach((val, index) => {
+                if(val.MaLoai == 'Sach01')
+                    tmp1 += `<div class="std-1-items">
+                                <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                    <img src="${val.HinhAnh}"
+                                        width="250px" height="350px">
+                                </a>
+                                <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                    <div class="std-1-items-info">${val.TenSach}</div>
+                                </a>
+                            </div>`
+                else if(val.MaLoai == 'Sach02')
+                    tmp2 += `<div class="std-1-items">
+                                <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                    <img src="${val.HinhAnh}"
+                                        width="250px" height="350px">
+                                </a>
+                                <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                    <div class="std-1-items-info">${val.TenSach}</div>
+                                </a>
+                            </div>`
+                else if(val.MaLoai == 'Sach03')
+                    tmp3 += `<div class="std-1-items">
+                                <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                    <img src="${val.HinhAnh}"
+                                        width="250px" height="350px">
+                                </a>
+                                <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                    <div class="std-1-items-info">${val.TenSach}</div>
+                                </a>
+                            </div>`
+                else
+                    tmp4 += `<div class="std-1-items">
+                                <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                    <img src="${val.HinhAnh}"
+                                        width="250px" height="350px">
+                                </a>
+                                <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                    <div class="std-1-items-info">${val.TenSach}</div>
+                                </a>
+                            </div>`
+
+            })
+
+            S01.innerHTML = tmp1
+            S02.innerHTML = tmp2
+            S03.innerHTML = tmp3
+            S04.innerHTML = tmp4
+        }
+    })
+    .catch(err => console.log(err))
+</script>
+</html>

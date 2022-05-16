@@ -1,0 +1,294 @@
+
+/* scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px grey; 
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(211, 211, 211); 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #000000; 
+}
+/* ------ */
+.img-title{
+    background-image: linear-gradient(#f3a8ec5d, rgba(0, 0, 0, 0)),url('http://en.ueh.edu.vn/images/upload/editer/5.%20Th%C6%B0%20vi%E1%BB%87n%20th%C3%B4ng%20minh%20UEH.PNG');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: static;
+}
+
+.title-container{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+.title-nav{
+    position: relative;
+    padding-left: 10px;
+}
+
+.title-nav:hover .nav-bar{
+    display: block;
+}
+
+.nav-bar{
+    background-color: #ffffff;
+    display: none;
+    position: absolute;
+    border: #000000 3px solid;
+    width: 200px;
+}
+
+.nav-items{
+    padding: 10px;
+    width: 100%;
+}
+
+.nav-item-link{
+    color: #454545;
+    text-decoration: none;
+}
+
+.nav-items:hover{
+    background-color: #727272d0;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.title-logo{
+    text-align: center;
+}
+
+.title-action{
+    color: rgb(0, 89, 255);
+    text-align: end;
+    padding-right: 10px;
+}
+
+.action-login-link{
+    text-decoration: none;
+    color: #000000;
+}
+
+.action-login-link:hover{
+    opacity: 60%;
+}
+
+.text-link{
+    color: #000000;
+    text-decoration: none;
+}
+
+.text-link :hover{
+    opacity: 80%;
+}
+
+.text-link :active{
+    opacity: 50%;
+}
+
+.wall{
+    background-image: url('https://i.pinimg.com/originals/2a/49/7b/2a497b70eddae8f4b6c4e526468961e7.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: -100;
+}
+
+.btn-show-all{
+    padding: 10px 100px;
+    color: #000000b1;
+    font-size: 1.2rem;
+    border: solid 1px #000000;
+    background-color: #ffffff85;
+    border: solid 1px #000000b1;
+}
+
+.btn-show-all:hover{
+    cursor: pointer;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.btn-show-all:active{
+    opacity: 80%;
+}
+
+.stadium-1{
+    display: flex;
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.std-1-items{
+    padding: 20px;
+}
+
+.std-1-items-info{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.stadium-2{
+    text-align: center;  
+    position: relative;  
+}
+.stadium-2::after{
+    content: 'Fanpage: https://facebook.com/library_plus';
+    color: #ffffff;
+    font-size: 1rem;
+    position: absolute;
+    bottom: 10%;
+    right: 20%;
+}
+
+.img-show-action{
+    filter: grayscale(100%);
+}
+.img-show-action:hover{
+    cursor: pointer;
+    filter: grayscale(10%);
+}
+
+.info-shop{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+.info-shop::before{
+    content: 'Club';
+    color: #ffffff;
+    font-size: 1.2rem;
+    position: absolute;
+    z-index: 20;
+    top: 5%;
+    left: 10%;
+}
+
+.info-shop::after{
+    content: 'Pages';
+    color: #ffffff;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 5%;
+    right: 10%;
+}
+
+.footer{
+    width: 100%;
+    background-color: #000000;
+    color: #d2d1d1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.social-media{
+    font-size: 1.5rem;
+}
+
+.pd-5{
+    padding: 5px;
+}
+
+.mg-t{
+    margin-top: 10px;
+}
+
+.mg-t-50{
+    margin-top: 50px;
+}
+
+.t-center{
+    text-align: center;
+}
+
+.search-area{
+    text-align: end;
+}
+
+.input-custom{
+    padding: 2px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(1, 61, 1);
+    outline: none;
+}
+
+.btn-cus{
+    padding: 0px 15px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(0, 0, 0);
+    box-shadow: #000000 3px 3px;
+    margin-bottom: 20px;
+    margin: 5px;
+}
+
+.btn-cus:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btn-cus:active{
+    opacity: 50%;
+}
+
+.bg-green{
+    background-color: green;
+    color: #ffffff;
+}
+
+h2{
+    font-size: 2rem;
+}
+
+.cl-wh{
+    color: #ffffff;
+}
+
+.text-left{
+    text-align: start;
+}
+
+/* responsive */
+@media only screen and (max-width: 600px) {
+    .footer{
+        display: block;
+    }
+    .footer-logo{
+        text-align: center;
+    }
+    .social-media{
+        display: flex;
+        justify-content: start;
+    }
+    .title-nav{
+        padding-left: 0;
+    }
+}

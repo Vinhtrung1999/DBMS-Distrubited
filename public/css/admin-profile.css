@@ -1,0 +1,131 @@
+.profile-items{
+    font-size: 1.5rem;
+    display: flex;
+    padding: 10px 200px;
+}
+
+.profile-items-title{
+    width: 250px;
+}
+
+.btn-profile-area{
+    text-align: end;
+}
+
+.btn-profile{
+    padding: 0px 15px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(0, 0, 0);
+    box-shadow: #000000 3px 3px;
+    margin-bottom: 20px;
+    margin: 5px;
+}
+
+.btn-profile:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btn-profile:active{
+    opacity: 50%;
+}
+
+
+.model-change-pwd{
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    background-color: rgb(248, 255, 203);
+    padding: 20px;
+    border: #000000 solid 3px;
+    display: none;
+    animation: model-show 0.3s ease-in;
+}
+
+.model-change-pwd-header{
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.model-change-pwd-items{
+    display: flex;
+    margin: 10px;
+}
+
+.model-items-title{
+    width: 200px;
+    font-size: 1.2rem;
+}
+
+.model-change-pwd-footer{
+    text-align: center;
+}
+
+.msg{
+    width: 50%;
+    padding: 10px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.bg-err{
+    background-color: #ff000098;
+    color: #ffffff;
+}
+
+.bg-success{
+    background-color: #07dc00a8;
+    color: #ffffff;
+}
+
+.bg-red{
+    background-color: #a41c1c;
+    color: #ffffff;
+}
+
+.bg-green{
+    background-color: green;
+    color: #ffffff;
+}
+
+.bg-yl{
+    background-color: #f1f82e;
+    color: #000000;
+}
+
+.input-custom{
+    padding: 2px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(0, 0, 0);
+    outline: none;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .profile-items{
+        padding: 10px;
+    }
+}
+
+@keyframes model-show {
+    0%{
+        transform: translateY(-100px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+@keyframes model-close {
+    0%{
+        transform: translateY(-50px);
+        opacity: 80%;
+    }
+    100%{
+        transform: translateY(-100px);
+        opacity: 50%;
+    }
+}

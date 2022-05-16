@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | staff</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/staff.css">
+    <link rel="stylesheet" href="/css/staff-addBook.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="staff-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="/view/staff-profile">Cá nhân</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="/view/staff-bookManager">Danh sách sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-borrowBook">Mượn sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-returnBook">Trả sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-bill">Danh sách phiếu</a></button>
+    </div>
+    <div class="detail-task">
+        <div class="detail-task-container bg-grey">
+            <div id="message"></div>
+            <div class="addBook-items">
+                <div class="addBook-items-title">Tên sách</div>
+                <div class="addBook-items-content">
+                    <input class="input-custom" type="text" id="book_name" name="book_name">
+                </div>
+            </div>
+            <div class="addBook-items">
+                <div class="addBook-items-title">Link hình ảnh</div>
+                <div class="addBook-items-content">
+                    <input class="input-custom" type="text" id="img" name="img">
+                </div>
+            </div>
+            <div class="addBook-items">
+                <div class="addBook-items-title">Tác giả</div>
+                <div class="addBook-items-content">
+                    <input class="input-custom" type="text" id="author" name="author">
+                </div>
+            </div>
+            <div class="addBook-items">
+                <div class="addBook-items-title">Loại sách</div>
+                <div class="addBook-items-content">
+                    <select class="input-custom" name="book_type" id="book_type">
+                        <option value="Sach01">Tiểu thuyết</option>
+                        <option value="Sach02">Truyện cười</option>
+                        <option value="Sach03">Trinh thám</option>
+                        <option value="Sach04">Truyện ma</option>
+                    </select>
+                </div>
+            </div>
+            <div class="addBook-items">
+                <div class="addBook-items-title">Trạng thái</div>
+                <div class="addBook-items-content">
+                    <select class="input-custom" name="book_status" id="book_status">
+                        <option value="0">Free</option>
+                        <option value="1">Busy</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btn-addBook-area">
+            <button class="btn-addBook bg-green" id="btn-add">Thêm</button>
+            <a href="/view/staff-bookManager"><button class="btn-addBook bg-red">Hủy</button></a>
+        </div>
+    </div>
+
+</body>
+<script>
+    let btnAdd = document.getElementById('btn-add')
+    let message = document.getElementById('message')
+    btnAdd.addEventListener('click' ,() => {
+        let TenSach = document.getElementById('book_name').value
+        let HinhAnh = document.getElementById('img').value
+        let TacGia = document.getElementById('author').value
+        let MaLoai = document.getElementById('book_type').value
+        let TrangThai = document.getElementById('book_status').value
+        if(TenSach && HinhAnh && TacGia && MaLoai && TrangThai){
+            fetch('/book/add', {
+                method:'POST',
+                body: JSON.stringify({TenSach, HinhAnh, TacGia, MaLoai, TrangThai}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(data => data.json())
+            .then(data => {
+                console.log(data)
+                if(data.code === 200){
+                    document.getElementById('book_name').value = ''
+                    document.getElementById('img').value = ''
+                    document.getElementById('author').value = ''
+                    document.getElementById('book_type').value = 'Sach01'
+                    document.getElementById('book_status').value = 0
+
+                    let msg = `<div class="msg bg-success">Thêm sách thành công</div>`
+                    message.innerHTML = msg
+                }
+                else{
+                    let msg = `<div class="msg bg-err">Thêm sách không thành công</div>`
+                    message.innerHTML = msg
+                }
+            })
+            .catch(err => console.log(err))
+        }
+        else{
+            let msg = `<div class="msg bg-err">Vui lòng nhập thông tin</div>`
+            message.innerHTML = msg
+        }
+    })
+</script>
+</html>

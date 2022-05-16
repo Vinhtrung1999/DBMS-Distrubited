@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee confirm position</title>
+    <!-- link css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/employee-confirm.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-confirm">
+        <div class="confirm-title text-center">
+            <img src="/images/logo-1.png" alt="" width="40%">
+        </div>
+        <div class="area-choice">
+            <h1 class="text-center">NHÂN VIÊN THƯ VIỆN</h1>
+            <a class="link-custom cl-back" href="/view/cf-cn-user/CN1"><button type="button" class="btn-confirm bg-white">Chi nhánh 1</button></a>
+            <a class="link-custom cl-back" href="/view/cf-cn-user/CN2"><button type="button" class="btn-confirm bg-white">Chi nhánh 2</button></a>
+            <a class="link-custom cl-back" href="/view/cf-cn-user/ADMIN"><button type="button" class="btn-confirm bg-white">ADMIN</button></a>
+        </div>
+        <div class="message" id="message"><%= locals.mess %></div>
+    </div>
+</body>
+<script>
+    let message = document.getElementById('message')
+    setTimeout(() => {
+        message.style.display = 'none'
+    }, 3000)
+
+</script>
+</html>

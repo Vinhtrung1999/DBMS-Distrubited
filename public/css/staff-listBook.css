@@ -1,0 +1,147 @@
+/* custom scroll bar */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #d8d8d8; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(0, 0, 0); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(46, 46, 46); 
+}
+/* ------------------------- */
+.search-area{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.btn-listBook{
+    padding: 0px 15px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(0, 0, 0);
+    box-shadow: #000000 3px 3px;
+    margin-bottom: 20px;
+    margin: 5px;
+}
+
+.btn-listBook:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btn-listBook:active{
+    opacity: 50%;
+}
+
+.input-custom{
+    padding: 2px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(1, 26, 61);
+    outline: none;
+}
+
+.bg-green{
+    background-color: green;
+}
+
+.bg-blue{
+    background-color: rgb(41, 98, 173);
+}
+
+.bg-white{
+    background-color: #ffffff;
+}
+
+.cl-wh{
+    color: #ffffff;
+}
+
+.list-book{
+    overflow-y: scroll;
+    height: 400px;
+    width: 1000px;
+    margin: auto;
+    border: #000000 solid 3px;
+}
+
+.list-book-items{
+    font-size: 1.5rem;
+    display: flex;
+    padding: 10px;
+}
+
+.list-book-items:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.list-book-item-id{
+    width: 25%;
+}
+
+.list-book-item-name{
+    width: 50%;
+}
+/* model */
+.model-info{
+    position: absolute;
+    top: -100px;
+    left: 35%;
+    width: 550px;
+    border: #000000 solid 3px;
+    padding: 10px;
+    display: none;
+}
+
+.model-info-header{
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.model-info-body{
+    font-size: 1.5rem;
+}
+
+.model-info-items{
+    display: flex;
+    padding: 5px;
+}
+
+.model-items-title{
+    width: 30%;
+}
+
+.model-info-footer{
+    text-align: end;
+}
+
+.cl-red{
+    color: red;
+}
+
+.cl-green{
+    color: green;
+}
+
+@media only screen and (max-width: 1200px) {
+    .list-book{
+        width: 100%;
+    }
+    .list-book-items{
+        display: block;
+    }
+    .model-info{
+        top: 10%;
+        left: 0%;
+        width: 100%;
+    }
+}

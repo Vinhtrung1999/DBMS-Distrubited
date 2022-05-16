@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | admin</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-profile.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="admin-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task btn-active"><a class="btn-link" href="#">Cá nhân</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/admin-staffManager">Danh sách nhân viên</a></button>
+    </div>
+    <div class="detail-task">
+        <div class="profile-items">
+            <div class="profile-items-title">Mã Nhân viên</div>
+            <div class="profile-items-content">
+                <%=user.MaNV%>
+            </div>
+        </div>
+        <div class="profile-items">
+            <div class="profile-items-title">Họ & Tên</div>
+            <div class="profile-items-content">
+                <%=user.HoTen%>
+            </div>
+        </div>
+        <div class="profile-items">
+            <div class="profile-items-title">Ngày sinh</div>
+            <div class="profile-items-content">
+                <%=user.NgaySinh.split("T")[0]%>
+            </div>
+        </div>
+        <div class="profile-items">
+            <div class="profile-items-title">Địa chỉ</div>
+            <div class="profile-items-content">
+                <%=user.Diachi%>
+            </div>
+        </div>
+        <div class="profile-items">
+            <div class="profile-items-title">Email</div>
+            <div class="profile-items-content">
+                <%=user.Email%>
+            </div>
+        </div>
+        <div class="profile-items">
+            <div class="profile-items-title">SĐT</div>
+            <div class="profile-items-content">
+                <%=user.Sdt%>
+            </div>
+        </div>
+        <div class="profile-items">
+            <div class="profile-items-title">Chức vụ</div>
+            <div class="profile-items-content">
+                <%= user.MaCV == 0 ? 'Admin' : 'Nhân viên'%>
+            </div>
+        </div>
+        <div class="btn-profile-area">
+            <button class="btn-profile bg-yl" type="button" id="btn_change_pwd">Thay đổi mật khẩu</button>
+            <a href="/view/logout"><button class="btn-profile bg-red" type="button" id="btn-logout">Đăng xuất</button></a>
+        </div>
+        <!-- model change pass -->
+        <div class="model-change-pwd" id="model_change_pwd">
+            <div class="model-change-pwd-header">Thiết lập mật khẩu</div>
+            <div class="model-change-pwd-body">
+                <div class="model-change-pwd-items">
+                    <div class="model-items-title">MK hiện tại</div>
+                    <input class="input-custom" type="password" id="pwd" name="pwd">
+                </div>
+                <div class="model-change-pwd-items">
+                    <div class="model-items-title">MK mới</div>
+                    <input class="input-custom" type="password" id="newPwd" name="newPwd">
+                </div>
+                <div class="model-change-pwd-items">
+                    <div class="model-items-title">Xác nhận MK mới</div>
+                    <input class="input-custom" type="password" id="confPwd" name="confPwd">
+                </div>
+            </div>
+            <div class="model-change-pwd-footer">
+                <button class="btn-profile bg-green" id="btn-save-pass">Lưu</button>
+                <button class="btn-profile bg-red" id="btn_close_model">Hủy</button>
+            </div>
+            <div id="message"></div>
+        </div>
+    </div>
+</body>
+
+<script src="/js/admin-profile.js"></script>
+
+</html>

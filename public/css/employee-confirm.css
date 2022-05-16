@@ -1,0 +1,72 @@
+.container-confirm{
+    position: relative;
+    background-image: linear-gradient(#ffffff ,#ffffffa2), url('https://img.freepik.com/free-photo/book-stack-library-room-blurred-bookshelf-background_42691-514.jpg?w=2000');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}
+
+.confirm-title{
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding-top: 30px;
+}
+
+.area-choice{
+    
+}
+
+.btn-confirm{
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    border: solid 3px #000000;
+    box-shadow: #000000 3px 3px;
+    padding: 5px 10px;
+    width: 300px;
+    font-size: 1.2rem;
+    font-family: 'Rowdies', cursive;
+}
+
+.btn-confirm:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btn-confirm:active{
+    opacity: 50%;
+}
+
+.link-custom{
+    text-decoration: none;
+
+}
+
+.message{
+    width: 60%;
+    margin: auto;
+    background-color: #50fd5b7d;
+    margin-top: 20px;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 10px;
+    color: #ff0000;
+    text-align: center;
+}
+
+.bg-white{
+    background-color: #ffffff;
+}
+
+.cl-back{
+    color: #000000;
+}
+
+.cl-back{
+    color: #000000;
+}
+
+.text-center{
+    text-align: center;
+}
+

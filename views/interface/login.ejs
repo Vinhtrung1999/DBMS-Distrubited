@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | Login</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="title-box">QUẢN LÝ THƯ VIỆN</div>
+            <div class="body-box">
+                <div class="body-box-items">
+                    <div class="username-title box-items-content">Tài khoản</div>
+                    <input class="box-items-input" type="text" placeholder="Tài khoản" id="username" name="username">
+                </div>
+                <div class="body-box-items">
+                    <div class="pwd-title box-items-content">Mật khẩu</div>
+                    <input class="box-items-input" type="password" placeholder="Mật khẩu" id="pwd" name="pwd">
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn-login" id="btn-login">Đăng nhập</button>
+                    <a href="/view/logout"><button type="button" class="btn-login bg-red" style="margin-left: 10px;">Trở về</button></a>
+                </div>
+            </div>
+            <div class="message" id="message"></div>
+        </div>
+    </div>
+
+</body>
+<script>
+    let btn = document.getElementById('btn-login')
+    let message = document.getElementById('message')
+    btn.addEventListener('click', () => {
+        let username = document.getElementById('username').value
+        let password = document.getElementById('pwd').value
+
+        if (password && username) {
+            fetch('/login', {
+                method: 'POST',
+                body: JSON.stringify({ MaNV: username, Pass: password }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(data => data.json())
+                .then(data => {
+                    if (data.code == 200)
+                        window.location.href = "/view/authentication"
+                    else{
+                        let msg = '<div class="msg bg-err">Tài khoản hoặc mật khẩu sai</div>'
+                        message.innerHTML = msg
+                    }
+                })
+                .catch(err => console.log(err))
+        }
+        else {
+            let msg = '<div class="msg bg-err">Điền thông tin</div>'
+            message.innerHTML = msg
+        }
+    })
+
+</script>
+
+</html>

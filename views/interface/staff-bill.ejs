@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | staff</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/staff.css">
+    <link rel="stylesheet" href="/css/staff-bill.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="staff-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="/view/staff-profile">Cá nhân</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-bookManager">Danh sách sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-borrowBook">Mượn sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-returnBook">Trả sách</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="#">Danh sách phiếu</a></button>
+    </div>
+
+    <div class="detail-task">
+        <div class="detail-task-lists">
+            <div class="borrow-list-bill box-apart">
+                <div class="box-apart-title cl-yl">Phiếu mượn</div>
+                <div class="box-apart-title-content" id="borrowBill"></div>
+            </div>
+            <div class="return-list-bill box-apart">
+                <div class="box-apart-title cl-green">Phiếu trả</div>
+                <div class="box-apart-title-content" id="returnBill"></div>
+            </div>
+        </div>
+
+        <!-- model BR -->
+        <div class="model-borrowInfo bg-white" id="model_borrowBill">
+            <div class="model-borrowInfo-header">
+                <img id="img" src="" alt="" width="150px">
+            </div>
+            <div class="model-borrowInfo-body">
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Mã phiếu mượn</div>
+                    <div id="bor_MaPM">xxxxxx</div>    
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Mã nhân viên</div>
+                    <div id="bor_MaNV">NV01</div>   
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Mã sách</div>
+                    <div id="bor_MaSach">B01</div>   
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Tên sách</div>
+                    <div id="bor_TenSach">B01</div>   
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Mã SV/GV</div>
+                    <div id="bor_MaSV_GV">51800934</div>  
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Tên SV/GV</div>
+                    <div id="bor_TenSV_GV">Phan Xuan Thu</div>   
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Ngày mượn</div>
+                    <div id="bor_NgayMuon">12/04/2000</div>   
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Chi nhánh</div>
+                    <div id="bor_MaCN">Campus 1</div>   
+                </div>
+            </div>
+            <div class="model-borrowInfo-footer">
+                <button class="btn-staffBill" type="button" id="close_model_borrowBill">Đóng</button>
+            </div>            
+        </div>
+
+         <!-- model RT -->
+         <div class="model-borrowInfo bg-white" id="model_returnBill">
+            <div class="model-borrowInfo-header">
+                <img id="rt-img" src="" alt="" width="150px">
+            </div>
+            <div class="model-borrowInfo-body">
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Mã phiếu trả</div>
+                    <div id="rt-MaPT">xxxxxx</div>    
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Mã phiếu mượn</div>
+                    <div id="rt-MaPM">>xxxxxx</div>    
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Mã sách</div>
+                    <div id="rt-MaSach">xxxxxx</div>    
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Tên sách</div>
+                    <div id="rt-TenSach">xxxxxx</div>    
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Mã SV/GV</div>
+                    <div id="rt-MaSV_GV">xxxxxx</div>    
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Tên SV/GV</div>
+                    <div id="rt-TenSV_GV">xxxxxx</div>    
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Ngày mượn</div>
+                    <div id="rt-NgayMuon">xxxxxx</div>    
+                </div>
+                <div class="model-borrowInfo-items">
+                    <div class="model-items-title">Ngày trả</div>
+                    <div id="rt-NgayTra">xxxxxx</div>    
+                </div>
+            </div>
+            <div class="model-borrowInfo-footer">
+                <button class="btn-staffBill" type="button" id="close_model_returnBill">Đóng</button>
+            </div>            
+        </div>
+    </div>
+</body>
+<script src="/js/staff-bill.js"></script>
+</html>

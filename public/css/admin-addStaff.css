@@ -1,0 +1,79 @@
+.addStaff-items{
+    font-size: 1.5rem;
+    display: flex;
+    padding: 10px 200px;
+}
+
+.addStaff-items-title{
+    width: 150px;
+}
+
+.btn-addStaff-area{
+    text-align: end;
+}
+
+.btn-addStaff{
+    padding: 0px 15px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(0, 0, 0);
+    box-shadow: #000000 3px 3px;
+    margin-bottom: 20px;
+    margin: 5px;
+}
+
+.btn-addStaff:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btn-addStaff:active{
+    opacity: 50%;
+}
+
+.msg{
+    width: 50%;
+    padding: 10px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.bg-err{
+    background-color: #ff000098;
+    color: #ffffff;
+}
+
+.bg-success{
+    background-color: #07dc00a8;
+    color: #ffffff;
+}
+
+.bg-red{
+    background-color: #a41c1c;
+    color: #ffffff;
+}
+
+.bg-green{
+    background-color: green;
+    color: #ffffff;
+}
+
+.bg-yl{
+    background-color: #f1f82e;
+    color: #000000;
+}
+
+.input-custom{
+    padding: 2px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(1, 61, 1);
+    outline: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    .addStaff-items{
+        padding: 10px;
+    }
+}

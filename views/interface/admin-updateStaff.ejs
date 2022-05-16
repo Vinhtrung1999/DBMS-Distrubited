@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | admin</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-updateStaff.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="admin-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="/view/admin-profile">Cá nhân</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="/view/admin-staffManager">Danh sách nhân viên</a></button>
+    </div>
+    <div class="detail-task">
+        <div class="search-area">
+            <input type="text" class="search input-custom" id="search" name="search" placeholder="Nhập mã nhân viên">
+            <button class="btn-updateStaff bg-green" id="btn-find">Tìm</button>
+        </div>
+        <div id="message"></div>
+        <div id="content" style="display: none;">
+            <div class="detail-task-container bg-grey">
+                <div class="updateStaff-items">
+                    <div class="updateStaff-items-title">Id</div>
+                    <div class="updateStaff-items-content" id="id">
+                        xxxxxxx
+                    </div>
+                </div>
+                <div class="updateStaff-items">
+                    <div class="updateStaff-items-title">Name</div>
+                    <div class="updateStaff-items-content">
+                        <input class="input-custom" type="text" id="name" name="name">
+                    </div>
+                </div>
+                <div class="updateStaff-items">
+                    <div class="updateStaff-items-title">Birthday</div>
+                    <div class="updateStaff-items-content">
+                        <input class="input-custom" type="date" id="birth" name="birth">
+                    </div>
+                </div>
+                <div class="updateStaff-items">
+                    <div class="updateStaff-items-title">Address</div>
+                    <div class="updateStaff-items-content">
+                        <input class="input-custom" type="text" id="address" name="address">
+                    </div>
+                </div>
+                <div class="updateStaff-items">
+                    <div class="updateStaff-items-title">Email</div>
+                    <div class="updateStaff-items-content">
+                        <input class="input-custom" type="email" id="email" name="email">
+                    </div>
+                </div>
+                <div class="updateStaff-items">
+                    <div class="updateStaff-items-title">Phone</div>
+                    <div class="updateStaff-items-content">
+                        <input class="input-custom" type="text" id="phone" name="phone">
+                    </div>
+                </div>
+                <div class="updateStaff-items">
+                    <div class="updateStaff-items-title">Position</div>
+                    <div class="updateStaff-items-content">
+                        <select class="input-custom" name="position" id="position">
+                            <option value="0">admin</option>
+                            <option value="1">staff</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="updateStaff-items">
+                    <div class="updateStaff-items-title">ID Campus</div>
+                    <div class="updateStaff-items-content">
+                        <select class="input-custom" name="idcampus" id="idcampus">
+                            <option value="CN1">Campus 1</option>
+                            <option value="CN2">Campus 2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="updateStaff-items">
+                    <div class="updateStaff-items-title">Salary</div>
+                    <div class="updateStaff-items-content">
+                        <input class="input-custom" type="number" id="salary" name="salary">
+                    </div>
+                </div>
+            </div>
+    
+            <div class="btn-updateStaff-area">
+                <button class="btn-updateStaff bg-green" id="btn-update">Cập nhật</button>
+                <a href="/view/admin-staffManager"><button class="btn-updateStaff bg-red">Hủy</button></a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    let btn_find = document.getElementById('btn-find')
+    let btn_update = document.getElementById('btn-update')
+    let message = document.getElementById('message')
+    btn_find.addEventListener('click', () => {
+        let search = document.getElementById('search').value
+        if(search){
+            fetch(`/staff/${search}`,{
+                method:'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(data => data.json())
+            .then(data => {
+                if(data.code === 200){
+                    message.innerHTML = ''
+                    nv = data.data
+                    let content = document.getElementById('content')
+                    document.getElementById('id').innerHTML = nv.MaNV
+                    document.getElementById('name').value = nv.HoTen
+                    document.getElementById('birth').value = nv.NgaySinh.split('T')[0]
+                    document.getElementById('address').value = nv.Diachi
+                    document.getElementById('email').value = nv.Email
+                    document.getElementById('phone').value = nv.Sdt
+                    document.getElementById('position').value = nv.MaCV
+                    document.getElementById('idcampus').value = nv.MaCN
+                    document.getElementById('salary').value = nv.Luong
+                    
+                    content.style.display = 'block'
+                }
+                else{
+                    let msg = '<div class="msg bg-err" id="msg">Nhân viên không tồn tại</div>'
+                    message.innerHTML = msg
+                }
+            })
+        }
+
+        btn_update.addEventListener('click', () => {
+            let MaNV= document.getElementById('id').innerHTML
+            let HoTen= document.getElementById('name').value
+            let NgaySinh= document.getElementById('birth').value
+            let DiaChi= document.getElementById('address').value
+            let Email= document.getElementById('email').value
+            let Sdt= document.getElementById('phone').value
+            let MaCV= parseInt(document.getElementById('position').value)
+            let MaCN= document.getElementById('idcampus').value
+            let Luong= parseFloat(document.getElementById('salary').value)
+
+            if(MaNV && HoTen && NgaySinh && DiaChi && Email && Sdt && MaCV && MaCN && Luong){
+                fetch(`/staff/${MaNV}`, {
+                    method:'PUT',
+                    body: JSON.stringify({MaNV, HoTen, NgaySinh, DiaChi, Email, Sdt, MaCV, MaCN, Luong}),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(data => data.json())
+                .then(data => {
+                    if(data.code === 200){
+                        let msg = '<div class="msg bg-success" id="msg">Cập nhật thành công</div>'
+                        message.innerHTML = msg
+                    }
+                    else{
+                        let msg = '<div class="msg bg-err" id="msg">Cập nhật không thành công</div>'
+                        message.innerHTML = msg
+                    }
+                })
+                .catch(err => console.log(err))
+            }
+            else{
+                let msg = '<div class="msg bg-err" id="msg">Vui lòng nhập đủ thông tin</div>'
+                message.innerHTML = msg
+            }
+        })
+    })
+</script>
+
+</html>

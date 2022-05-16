@@ -1,0 +1,65 @@
+.removeBook-items{
+    font-size: 1.5rem;
+    display: flex;
+    padding: 10px 200px;
+}
+
+.removeBook-items-title{
+    width: 150px;
+}
+
+.btn-removeBook-area{
+    text-align: end;
+}
+
+.btn-removeBook{
+    padding: 0px 15px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(0, 0, 0);
+    box-shadow: #000000 3px 3px;
+    margin-bottom: 20px;
+    margin: 5px;
+}
+
+.btn-removeBook:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btn-removeBook:active{
+    opacity: 50%;
+}
+
+.search-area{
+    text-align: end;
+}
+
+.bg-red{
+    background-color: #a41c1c;
+    color: #ffffff;
+}
+
+.bg-green{
+    background-color: green;
+    color: #ffffff;
+}
+
+.bg-yl{
+    background-color: #f1f82e;
+    color: #000000;
+}
+
+.input-custom{
+    padding: 2px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(1, 61, 1);
+    outline: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    .removeBook-items{
+        padding: 10px;
+    }
+}

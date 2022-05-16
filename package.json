@@ -1,0 +1,23 @@
+{
+  "name": "codebackend",
+  "version": "1.0.0",
+  "description": "1.=> Vào file connectDB.js để sửa tên các trạm cơ sở dữ liệu cho phù hợp.\r 2.=> chạy dòng lệnh: node index.js (server được mở ở port 8888)\r 3.=> (get) http://localhost:8888/start để khởi tạo một tài khoản admin đầu tiên.\r 4.=> (post) http://localhost:8888/login để đăng nhập (MaNV=admin;Pass=admin123)\r 5.=> Sử dụng tài khoản admin này để tạo các tài khoản nhân viên.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "msnodesqlv8": "^2.4.8",
+    "mssql": "^8.1.0",
+    "node-fetch": "^2.0.0"
+  }
+}

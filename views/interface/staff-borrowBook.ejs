@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | staff</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/staff.css">
+    <link rel="stylesheet" href="/css/staff-borrowBook.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="staff-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="/view/staff-profile">Cá nhân</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-bookManager">Danh sách sách</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="#">Mượn sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-returnBook">Trả sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-bill">Danh sách phiếu</a></button>
+    </div>
+    <div class="detail-task">
+        <div id="message"></div>
+        <div class="detail-task-container bg-grey">
+            <div class="borrowBook-items">
+                <div class="borrowBook-items-title">Mã sách</div>
+                <div class="borrowBook-items-content">
+                    <input class="input-custom" type="text" id="book_id" name="book_id">
+                </div>
+            </div>
+            <div class="borrowBook-items">
+                <div class="borrowBook-items-title">Mã SV/GV</div>
+                <div class="borrowBook-items-content">
+                    <input class="input-custom" type="text" id="cus_id" name="cus_id">
+                </div>
+            </div>
+            <div class="borrowBook-items">
+                <div class="borrowBook-items-title">Tên SV\GV</div>
+                <div class="borrowBook-items-content">
+                    <input class="input-custom" type="text" id="cus_name" name="cus_name">
+                </div>
+            </div>
+        </div>
+        
+        <div class="btn-borrowBook-area">
+            <button class="btn-borrowBook bg-yl" id="btn-borrow" type="button">In phiếu mượn</button>
+        </div>
+    </div>
+
+</body>
+<script>
+    let btn_borrow = document.getElementById('btn-borrow')
+    let message = document.getElementById('message')
+    btn_borrow.addEventListener('click', () => {
+        let MaSach = document.getElementById('book_id').value
+        let MaSV_GV = document.getElementById('cus_id').value
+        let TenSV_GV = document.getElementById('cus_name').value
+
+        if(MaSach && MaSV_GV && TenSV_GV){
+            fetch(`/borBill/add`, {
+                method:'POST',
+                body: JSON.stringify({MaSach, MaSV_GV, TenSV_GV}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(data => data.json())
+            .then(data => {
+                if(data.code == 200){
+                    fetch(`/changeStatusBorrow`, {
+                        method:'POST',
+                        body: JSON.stringify({MaSach}),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(dataChange => dataChange.json())
+                    .then(dataChange => {
+                        if(dataChange.code == 200){
+                            document.getElementById('book_id').value = ''
+                            document.getElementById('cus_id').value = ''
+                            document.getElementById('cus_name').value = ''
+                            
+                            let msg = `<div class="msg bg-success">Thêm phiếu mượn thành công</div>`
+                            message.innerHTML = msg
+                            window.print()
+                        }
+                        else{
+                            let msg = `<div class="msg bg-err">Mượn thất bại</div>`
+                            message.innerHTML = msg
+                        }
+                    })
+                    .catch(err => console.log(err))
+                }
+                else{
+                    let msg = `<div class="msg bg-err">Mã sách không tồn tại hoặc sách đã được mượn</div>`
+                    message.innerHTML = msg
+                }
+            })
+            .catch(err => console.log(err))
+        }
+        else{
+            let msg = `<div class="msg bg-err">Vui lòng nhập thông tin</div>`
+            message.innerHTML = msg
+        }
+        
+    })
+</script>
+</html>

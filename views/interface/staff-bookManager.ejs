@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | staff</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/staff.css">
+    <link rel="stylesheet" href="/css/staff-bookManager.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="staff-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="/view/staff-profile">Cá nhân</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="#">Danh sách sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-borrowBook">Mượn sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-returnBook">Trả sách</a></button>
+        <button class="btn-task"><a class="btn-link" href="/view/staff-bill">Danh sách phiếu</a></button>
+    </div>
+
+    <div class="detail-task">
+        <div class="book-manager">
+            <div class="book-manager-items">
+                <a class="btn-link" href="/view/staff-listBook">
+                    <button class="btn-bookManager cl-wh bg-red">Xem danh sách sách</button>
+                </a>
+            </div>
+            <div class="book-manager-items">
+                <a class="btn-link" href="/view/staff-addBook">
+                    <button class="btn-bookManager cl-wh bg-green">Thêm sách mới</button>
+                </a>
+            </div>
+            <div class="book-manager-items">
+                <a class="btn-link" href="/view/staff-updateBook">
+                    <button class="btn-bookManager bg-yl">Cập nhật sách cũ</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

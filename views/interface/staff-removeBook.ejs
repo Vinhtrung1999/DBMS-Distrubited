@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | staff</title>
+    <!-- css -->
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/staff.css">
+    <link rel="stylesheet" href="../public/css/staff-removeBook.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="staff-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="./staff-profile.html">Profile</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="./staff-bookManager.html">Book</a></button>
+        <button class="btn-task"><a class="btn-link" href="./staff-borrowBook.html">Borrow book</a></button>
+        <button class="btn-task"><a class="btn-link" href="./staff-returnBook.html">Return book</a></button>
+        <button class="btn-task"><a class="btn-link" href="./staff-bill.html">Bills</a></button>
+    </div>
+    <div class="detail-task">
+        <div class="detail-task-container bg-grey">
+            <div class="search-area">
+                <input type="text" class="search input-custom" id="search" name="search" placeholder="Search by ID">
+                <button class="btn-removeBook bg-green">Find</button>
+            </div>
+            <div class="removeBook-items">
+                <div class="removeBook-items-title">Book Id</div>
+                <div class="removeBook-items-content">
+                    xxxxxx
+                </div>
+            </div>
+            <div class="removeBook-items">
+                <div class="removeBook-items-title">Book Name</div>
+                <div class="removeBook-items-content">Lolita</div>
+            </div>
+            <div class="removeBook-items">
+                <div class="removeBook-items-title">Author</div>
+                <div class="removeBook-items-content">Vladimir Vladimirovich</div>
+            </div>
+            <div class="removeBook-items">
+                <div class="removeBook-items-title">Book Type</div>
+                <div class="removeBook-items-content">Novel</div>
+            </div>
+            <div class="removeBook-items">
+                <div class="removeBook-items-title">ID Campus</div>
+                <div class="removeBook-items-content">Campus 1</div>
+            </div>
+            <div class="removeBook-items">
+                <div class="removeBook-items-title">Book status</div>
+                <div class="removeBook-items-content">Free </div>
+            </div>
+        </div>
+        
+        <div class="btn-removeBook-area">
+            <button class="btn-removeBook bg-green">Update book</button>
+            <button class="btn-removeBook bg-red">Cancel</button>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome...</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/customer-listBook.css">
+    <!-- font gg -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wall"></div>
+    <div class="img-title">
+        <div class="title-container">
+            <div class="title-nav">
+                <i class="fa-solid fa-bars"></i>
+                <div class="nav-bar">
+                    <a href="/" class="nav-item-link"><div class="nav-items">Trang chủ</div></a>
+                    <a href="#" class="nav-item-link"><div class="nav-items">Danh sách sách</div></a>
+                    <a href="/view/cn-logout" class="nav-item-link"><div class="nav-items">Chọn chi nhánh</div></a>
+                </div>
+            </div>
+            <div class="title-logo">
+                <img src="/images/logo-1.png" alt="Logo" width="100%">
+            </div>
+            <div class="title-action">
+                <div class="action-login">Hi!</div>
+            </div>
+        </div>
+    </div>
+    <div class="tool">
+        <div class="tool-filter">
+            <select class="input-custom" name="book_type" id="book_type">
+                <option value="none">All</option>
+                <option value="Sach01">Tiểu thuyết</option>
+                <option value="Sach02">Truyện cười</option>
+                <option value="Sach03">Trinh thám</option>
+                <option value="Sach04">Truyện ma</option>
+            </select>
+            <button class="btn-cus bg-green" type="button" id="filter"><i class="fa-solid fa-filter"></i></button>
+        </div>
+        <div class="tool-search">
+            <div class="search-area">
+                <input type="text" class="search input-custom" id="search" name="search" placeholder="Search by ID">
+                <button class="btn-cus bg-green"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="lst-book-1" id="list-book"></div>
+</body>
+<script>
+    let data_listBook = []
+    fetch(`/books`, {
+        method:'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(data => data.json())
+    .then(data => {
+        if(data.code === 200){
+            let listBook = document.getElementById('list-book')
+            let tmp = ''
+            data.data.forEach((val, index) => {
+                data_listBook.push(val)
+                tmp += `<div class="lst-book-1-items">
+                            <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                <img src="${val.HinhAnh}" width="250px" height="350px">
+                            </a>
+                            <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                <div class="lst-book-1-items-info">${val.TenSach}</div>
+                            </a>
+                        </div>`
+
+            })
+
+            listBook.innerHTML = tmp
+        }
+    })
+    .catch(err => console.log(err))
+
+
+    let filter = document.getElementById('filter')
+    filter.addEventListener('click', () => {
+        let book_type = document.getElementById('book_type').value
+        fetch(`/books`, {
+            method:'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(data => data.json())
+        .then(data => {
+            if(data.code === 200){
+                let listBook = document.getElementById('list-book')
+                let tmp = ''
+                if(book_type == 'none'){
+                    data.data.forEach((val, index) => {
+                        tmp += `<div class="lst-book-1-items">
+                                    <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                        <img src="${val.HinhAnh}" width="250px" height="350px">
+                                    </a>
+                                    <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                        <div class="lst-book-1-items-info">${val.TenSach}</div>
+                                    </a>
+                                </div>`
+
+                    })
+                }
+                else{
+                    data.data.forEach((val, index) => {
+                        if(val.MaLoai == book_type)
+                            tmp += `<div class="lst-book-1-items">
+                                        <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                            <img src="${val.HinhAnh}" width="250px" height="350px">
+                                        </a>
+                                        <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                            <div class="lst-book-1-items-info">${val.TenSach}</div>
+                                        </a>
+                                    </div>`
+
+                    })
+                }
+
+
+                listBook.innerHTML = tmp
+            }
+        })
+    })
+
+    let search = document.getElementById('search')
+
+    search.addEventListener('keyup', (e) => {
+        let words = e.target.value
+        let listBook = document.getElementById('list-book')
+        let temp = ''
+        data_listBook.forEach((val) => {
+            if(val.TenSach.toLowerCase().indexOf(words.toLowerCase()) != -1){
+                temp += `<div class="lst-book-1-items">
+                            <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                <img src="${val.HinhAnh}" width="250px" height="350px">
+                            </a>
+                            <a class="text-link" href="/view/customer-detail-book/${val.MaSach}">
+                                <div class="lst-book-1-items-info">${val.TenSach}</div>
+                            </a>
+                        </div>`
+            }
+        })
+
+        listBook.innerHTML = temp
+        
+    })
+</script>
+</html>

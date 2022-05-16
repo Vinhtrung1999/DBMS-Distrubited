@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | admin</title>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-addStaff.css">
+    <!-- gg font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="admin-title">QUẢN LÝ THƯ VIỆN</div>
+    <div class="btn-area">
+        <button class="btn-task"><a class="btn-link" href="/view/admin-profile">Cá nhân</a></button>
+        <button class="btn-task btn-active"><a class="btn-link" href="/view/admin-staffManager">Danh sách nhân viên</a></button>
+    </div>
+    <div class="detail-task">
+        <div id="message"></div>
+        <div class="detail-task-container bg-grey">
+            <div class="addStaff-items">
+                <div class="addStaff-items-title">Họ & tên</div>
+                <div class="addStaff-items-content">
+                    <input class="input-custom" type="text" id="name" name="name">
+                </div>
+            </div>
+            <div class="addStaff-items">
+                <div class="addStaff-items-title">Ngày sinh</div>
+                <div class="addStaff-items-content">
+                    <input class="input-custom" type="date" id="birth" name="birth" data-date-format="YYYY MM DD">
+                </div>
+            </div>
+            <div class="addStaff-items">
+                <div class="addStaff-items-title">Địa chỉ</div>
+                <div class="addStaff-items-content">
+                    <input class="input-custom" type="text" id="address" name="address">
+                </div>
+            </div>
+            <div class="addStaff-items">
+                <div class="addStaff-items-title">Email</div>
+                <div class="addStaff-items-content">
+                    <input class="input-custom" type="email" id="email" name="email">
+                </div>
+            </div>
+            <div class="addStaff-items">
+                <div class="addStaff-items-title">SĐT</div>
+                <div class="addStaff-items-content">
+                    <input class="input-custom" type="text" id="phone" name="phone">
+                </div>
+            </div>
+            <div class="addStaff-items">
+                <div class="addStaff-items-title">Chức vụ</div>
+                <div class="addStaff-items-content">
+                    <select class="input-custom" name="position" id="position">
+                        <option value="0">Admin</option>
+                        <option value="1">Nhân viên</option>
+                    </select>
+                </div>
+            </div>
+            <div class="addStaff-items">
+                <div class="addStaff-items-title">Chi nhánh</div>
+                <div class="addStaff-items-content">
+                    <select class="input-custom" name="idcampus" id="idcampus">
+                        <option value="CN1">Chi nhánh 1</option>
+                        <option value="CN2">Chi nhánh 2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="addStaff-items">
+                <div class="addStaff-items-title">Lương</div>
+                <div class="addStaff-items-content">
+                    <input class="input-custom" type="number" id="salary" name="salary">
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-addStaff-area">
+            <button class="btn-addStaff bg-green" type="button" id="btn-add">Thêm</button>
+            <a href="/view/admin-staffManager"><button class="btn-addStaff bg-red">Hủy</button></a>
+        </div>
+    </div>
+
+</body>
+<script>
+    let btnAdd = document.getElementById('btn-add')
+    let message = document.getElementById('message')
+    btnAdd.addEventListener('click', () => {
+
+        let HoTen = document.getElementById('name').value
+        let NgaySinh = document.getElementById('birth').value
+        let DiaChi = document.getElementById('address').value
+        let Email = document.getElementById('email').value
+        let Sdt = document.getElementById('phone').value
+        let Luong = parseFloat(document.getElementById('salary').value)
+        let MaCV = parseInt(document.getElementById('position').value)
+        let MaCN = document.getElementById('idcampus').value
+        if(HoTen && DiaChi && Sdt && Email){
+            fetch('/staff/add', {
+                method: 'POST',
+                body: JSON.stringify({ HoTen, NgaySinh, DiaChi, Email, Sdt, Luong, MaCV, MaCN }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(data => data.json())
+                .then(data => {
+                    if (data.code == 200){
+                        document.getElementById('name').value = ''
+                        document.getElementById('birth').value = ''
+                        document.getElementById('address').value = ''
+                        document.getElementById('email').value = ''
+                        document.getElementById('phone').value = ''
+                        document.getElementById('salary').value = 0
+                        document.getElementById('position').value = 0
+                        document.getElementById('idcampus').value = 'CN1'
+
+                        let msg = '<div class="msg bg-success">Thêm không thành công</div>'
+                        message.innerHTML = msg
+                    }
+                    else{
+                        let msg = '<div class="msg bg-err">Thêm không thành công</div>'
+                        message.innerHTML = msg
+                    }
+                })
+        }
+        else{
+            let msg = '<div class="msg bg-err">Vui lòng nhập thông tin</div>'
+            message.innerHTML = msg
+        }
+        
+    })
+
+
+</script>
+
+</html>

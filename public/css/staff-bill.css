@@ -1,0 +1,141 @@
+/* custom scroll bar */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #d8d8d8; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(0, 0, 0); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(46, 46, 46); 
+}
+/* ------------------------- */
+.detail-task-lists{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.5rem;
+}
+
+.box-apart-title{
+    font-size: 1.8rem;
+}
+
+.box-apart-title-content{
+    overflow-y: scroll;
+    height: 400px;
+    width: 400px;
+}
+
+.box-apart-title-content{
+    border: solid 3px #000000;
+}
+
+.list-content-items{
+    padding: 5px 10px;
+}
+
+.list-content-items:hover{
+    opacity: 60%;
+    cursor: pointer;
+}
+
+.bg-green{
+    background-color: green;
+}
+
+.cl-green{
+    color: green;
+}
+
+.cl-wh{
+    color: #ffffff;
+}
+
+.bg-white{
+    background-color: #ffffff;
+}
+
+.bg-yl{
+    background-color: rgb(255, 200, 0);
+}
+
+.cl-yl{
+    color: rgb(255, 200, 0);
+}
+
+
+/* model */
+.model-borrowInfo{
+    position: absolute;
+    top: -100px;
+    left: 30%;
+    padding: 10px;
+    border: #000000 solid 3px;
+    display: none;
+    animation: model-show 0.3s ease-in;
+    width: 40%;
+    font-size: 1.5rem;
+}
+
+.model-borrowInfo-header{
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.model-borrowInfo-items{
+    display: flex;
+    margin: 10px;
+}
+
+.model-items-title{
+    width: 300px;
+}
+
+.model-borrowInfo-footer{
+    text-align: end;
+}
+
+/* button */
+.btn-staffBill{
+    padding: 0px 15px;
+    font-family: 'Rowdies', cursive;
+    font-size: 1.2rem;
+    border: solid 3px rgb(0, 0, 0);
+    box-shadow: #000000 3px 3px;
+    margin-bottom: 20px;
+    margin: 5px;
+}
+
+.btn-staffBill:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.btn-staffBill:active{
+    opacity: 50%;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .detail-task-lists{
+        display: block;
+        text-align: center;
+    }
+
+    .box-apart-title-content{
+        height: 200px;
+        width: 100%;
+    }
+
+    .model-borrowInfo{
+        width: 100%;
+        left: 0;
+    }    
+    
+}

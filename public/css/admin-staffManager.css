@@ -1,0 +1,47 @@
+.staff-manager{
+    text-align: center;
+}
+
+.staff-manager-items{
+    display: block;
+    padding: 20px;
+}
+
+.btn-staffManager{
+    border: 3px solid #000000;
+    box-shadow: 3px 3px #000000;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-family: 'Rowdies', cursive;
+    width: 250px;
+}
+
+.bg-red{
+    background-color: #a41c1c;
+}
+
+.bg-green{
+    background-color: green;
+}
+
+.bg-yl{
+    background-color: #f1f82e;
+}
+
+.bg-blue{
+    background-color: blue;
+}
+
+.cl-wh{
+    color: #ffffff;
+}
+
+.btn-staffManager:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+
+.btn-staffManager:active{
+    opacity: 50%;
+}
